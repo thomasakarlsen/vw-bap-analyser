@@ -11,7 +11,8 @@ const state = BatteryControlClimateState.fromMessage(props.message);
 </script>
 
 <template>
-  <div class="flex gap-2">
+  <div class="flex flex-col space-y-2">
+    <div class="flex gap-2">
     <span v-if="state.climateMode.climating" class="inline-flex items-center rounded-md bg-amber-100 px-2 py-1 text-xs font-medium text-amber-700">
       Climating
     </span>
@@ -61,6 +62,11 @@ const state = BatteryControlClimateState.fromMessage(props.message);
       WH Rear
     </span>
   </div>
+    <div class="flex items-center space-x-2">
+      <span v-for="(data, index) in message.data" :key="index">{{ toHex(data) }}</span>
+    </div>
+  </div>
+  
 </template>
 
 <style scoped>

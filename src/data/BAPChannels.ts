@@ -72,8 +72,8 @@ export const BAPChannels: BAPChannelArray = {
                         'view': 'Unknown'
                     },
                     0x10: {
-                        'name': 'BatteryControlPlug?',
-                        'view': 'Unknown'
+                        'name': 'PlugState',
+                        'view': 'BatteryControlPlug'
                     },
                     0x11: {
                         'name': 'BatteryControlChargeState',
@@ -85,7 +85,7 @@ export const BAPChannels: BAPChannelArray = {
                     },
                     0x18: {
                         'name': 'BatteryControlClimateOperationModeInstallation',
-                        'view': 'Unknown'
+                        'view': 'BatteryControlClimateOperationModeInstallation'
                     },
                     0x19: {
                         'name': 'BatteryControlProfilesArray',
@@ -212,7 +212,45 @@ export const BAPChannels: BAPChannelArray = {
                 }
             }
         }
-    } as BAPChannel
+    } as BAPChannel,
+    'DoorLocking': {
+        name: 'DoorLocking',
+        devices: {
+            0x0d: {
+                'name': 'DoorLocking',
+                functions: {
+                    0x01: {
+                        'name': 'GetAllProperties',
+                        'view': 'Unknown'
+                    },
+                    0x02: {
+                        'name': 'BAP-Config',
+                        'view': 'BAPConfig'
+                    },
+                    0x03: {
+                        'name': 'FunctionList',
+                        'view': 'Unknown'
+                    },
+                    0x04: {
+                        'name': 'HeartbeatConfig',
+                        'view': 'HeartbeatConfig'
+                    },
+                    0x0E: {
+                        'name': 'FSG-Setup',
+                        'view': 'Unknown'
+                    },
+                    0x0F: {
+                        'name': 'FSG-OperationState',
+                        'view': 'Unknown'
+                    },
+                    0x24: {
+                        'name': 'UserList',
+                        'view': 'GenericArray'
+                    },
+                }
+            }
+        }
+    },
 };
 
 
