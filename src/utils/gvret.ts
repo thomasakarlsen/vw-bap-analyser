@@ -132,7 +132,7 @@ export const parseGVRETFile = (file: File, completed: (messages: BAPMessage[], m
           const prevMessageTotalDataLength = prevMessage.totalDataLength ? prevMessage.totalDataLength : 0;
 
           if (prevMessage.frame.type === 'LongStart' && prevMessage.messageIndex === message.messageIndex && prevMessage.data.length < prevMessageTotalDataLength) {
-            prevMessage.addData(message.data);
+            prevMessage.addFrame(message.frame);
             break;
           }
         }

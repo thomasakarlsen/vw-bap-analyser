@@ -8,6 +8,7 @@ import type { GVRETLine } from '@/utils/gvret'
 export class BAPMessage {
 
     frame: BAPFrame;
+    frameParts: Array<BAPFrame>;
     messageIndex: number;
     operationId: number | null;
     deviceId: number | null;
@@ -23,6 +24,9 @@ export class BAPMessage {
         this.functionId = functionId;
         this.data = data;
         this.totalDataLength = totalDataLength;
+
+        this.frameParts = [];
+        this.frameParts.push(frame);
     }
 
     static fromBAPFrame(bapFrame: BAPFrame) {
@@ -61,6 +65,16 @@ export class BAPMessage {
 
     addData(data: Array<number>) {
         this.data = this.data.concat(data);
+    }
+
+    addFrame(frame: BAPFrame) {
+        this.frameParts.push(frame);
+
+        if (frame.type === 'LongContinuation') {
+            this.addData(frame.data.slice(1));
+        } else {
+            this.addData(frame.data);
+        }
     }
 
     get deviceIdHex() {
