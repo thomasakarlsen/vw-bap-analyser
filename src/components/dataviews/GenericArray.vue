@@ -65,6 +65,9 @@ const array = computed(() => {
         <span v-for="(byte, index) in array?.data" :key="index">{{ toHex(byte) }}</span>
       </div>
     </slot>
+    <div class="flex gap-2">
+      <span v-for="(byte, index) in array?.data" :key="index">{{ toHex(byte) }} {{ String.fromCharCode(byte) }}</span>
+    </div>
   </div>
 </template>
 

@@ -49,10 +49,16 @@ export class BatteryControlProfile {
 
         let pos = null
 
-        // If the element position is transmitted, the first byte contains the position
+        // If the element position is transmitted, the first 8 bits contains the position
+        // If the array is using large indexes, the position is 16 bits
         if (array.arrayPositionTransmitted) {
+          if(array.largeIndexes) {
+            pos = data[0] | data[1] << 8;
+            data = data.slice(2);
+          } else {
             pos = data[0];
             data = data.slice(1);
+          }
         }
 
         let profile: BatteryControlProfile | null = null;

@@ -18,7 +18,7 @@ const dataview = computed(() => {
 
 <template>
   <tr :class="{ 'bg-blue-100 even:bg-blue-200': message.sender === 'asg', 'bg-green-100 even:bg-green-200': message.sender === 'fsg' }">
-    <td class="whitespace-nowrap px-3 py-3">{{ message.frame.idHex }}</td>
+    <td class="whitespace-nowrap px-3 py-3">{{ message.frame.idHex }} - {{ message.frame.type }}</td>
     <td class="whitespace-nowrap px-3 py-3">{{ message.channel?.name }}</td>
     <td class="whitespace-nowrap px-3 py-3">{{ message.sender }}</td>
     <td class="whitespace-nowrap px-3 py-3">{{ message.deviceIdHex }}</td>
