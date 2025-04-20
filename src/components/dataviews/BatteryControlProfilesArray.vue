@@ -21,7 +21,7 @@ const array = computed(() => {
 
 <template>
   <GenericArray :message="message">
-    <div v-for="profile in array.items" :key="profile.pos" class="flex gap-2">
+    <div v-for="(profile, index) in array.items" :key="profile.pos ?? index" class="flex gap-2">
       <span class="inline-flex items-center rounded-md bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800">
         Pos: {{ profile.pos }}
       </span>
