@@ -77,7 +77,7 @@ export const BAPChannels: BAPChannelArray = {
                     },
                     0x11: {
                         'name': 'BatteryControlChargeState',
-                        'view': 'Unknown'
+                        'view': 'BatteryControlChargeState'
                     },
                     0x12: {
                         'name': 'BatteryControlClimateState',

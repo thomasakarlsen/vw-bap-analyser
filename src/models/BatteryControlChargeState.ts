@@ -20,7 +20,7 @@ export enum ChargeState {
   AbortedPowerSupplyNotAvailable,
   AbortedNotInParkPosition,
   Completed,
-  NoError,
+  NoError
 }
 
 export enum ChargeStartReason {
@@ -29,7 +29,7 @@ export enum ChargeStartReason {
   Timer2,
   Timer3,
   Immediately,
-  PushButton,
+  PushButton
 }
 
 export enum TargetSOC {
@@ -39,36 +39,66 @@ export enum TargetSOC {
 }
 
 export class BatteryControlChargeState {
+  chargeMode: ChargeMode
+  chargeState: ChargeState
+  currentChargeLevel: number
+  remainingChargeTime: number
+  currentChargeRange: number
+  unitRange: number
+  current: number
+  startReason: ChargeStartReason
+  batteryClimateState: number
+  targetSOC: TargetSOC
 
-  chargeMode: ChargeMode;
-  chargeState: ChargeState;
-  currentChargeLevel: number;
-  remainingChargeTime: number;
-  currentChargeRange: number;
-  unitRange: number;
-  current: number;
-  startReason: ChargeStartReason;
-  batteryClimateState: number;
-  targetSOC: TargetSOC;
-
-  constructor(chargeMode: ChargeMode, chargeState: ChargeState, currentChargeLevel: number, remainingChargeTime: number, currentChargeRange: number, unitRange: number, current: number, startReason: ChargeStartReason, batteryClimateState: number, targetSOC: TargetSOC) {
-    this.chargeMode = chargeMode;
-    this.chargeState = chargeState;
-    this.currentChargeLevel = currentChargeLevel;
-    this.remainingChargeTime = remainingChargeTime;
-    this.currentChargeRange = currentChargeRange;
-    this.unitRange = unitRange;
-    this.current = current;
-    this.startReason = startReason;
-    this.batteryClimateState = batteryClimateState;
-    this.targetSOC = targetSOC;
+  constructor(
+    chargeMode: ChargeMode,
+    chargeState: ChargeState,
+    currentChargeLevel: number,
+    remainingChargeTime: number,
+    currentChargeRange: number,
+    unitRange: number,
+    current: number,
+    startReason: ChargeStartReason,
+    batteryClimateState: number,
+    targetSOC: TargetSOC
+  ) {
+    this.chargeMode = chargeMode
+    this.chargeState = chargeState
+    this.currentChargeLevel = currentChargeLevel
+    this.remainingChargeTime = remainingChargeTime
+    this.currentChargeRange = currentChargeRange
+    this.unitRange = unitRange
+    this.current = current
+    this.startReason = startReason
+    this.batteryClimateState = batteryClimateState
+    this.targetSOC = targetSOC
   }
 
   static fromMessage(message: BAPMessage) {
+    const chargeMode = (message.data[0] & 0xf0) >> 4
+    const chargeState = message.data[0] & 0x0f
 
-    const chargeMode = (message.data[0] & 0xf0) >> 4;
-    const ChargeState = (message.data[0] & 0x0f);
+    const currentChargeLevel = message.data[1]
 
-    const currentChargeLevel = message.data[1];
+    const remainingChargeTime = message.data[2]
+    const currentChargeRange = message.data[3]
+    const unitRange = message.data[4]
+    const current = message.data[5]
+    const batteryClimateState = (message.data[6] & 0xf0) >> 4
+    const startReason = (message.data[8] & 0xf0) >> 4
+    const targetSOC = message.data[8] & 0x0f
+
+    return new BatteryControlChargeState(
+      chargeMode,
+      chargeState,
+      currentChargeLevel,
+      remainingChargeTime,
+      currentChargeRange,
+      unitRange,
+      current,
+      startReason,
+      batteryClimateState,
+      targetSOC
+    )
   }
 }
