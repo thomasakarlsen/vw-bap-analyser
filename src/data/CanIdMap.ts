@@ -29,7 +29,7 @@ export const CanIdMap: CanIdMapArray = {
     },
     0x17333711: {
         'channel': 'ENI',
-        'type': 'fsg'
+        'type': 'asg'
     },
     0x17330D00: {
         'channel': 'DoorLocking',
@@ -37,11 +37,11 @@ export const CanIdMap: CanIdMapArray = {
     },
     0x17330D01: {
         'channel': 'DoorLocking',
-        'type': 'fsg'
+        'type': 'asg'
     },
     0x17330D02: {
         'channel': 'DoorLocking',
-        'type': 'fsg'
+        'type': 'asg'
     },
     0x17330D10: {
         'channel': 'DoorLocking',
